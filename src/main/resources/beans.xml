@@ -1,7 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< HEAD
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-=======
+<?xml version = "1.0" encoding = "UTF-8"?>
 
->>>>>>> origin/main
-<properties/>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="helloWorld" class="com.spring.calculator.HelloWorld" >
+        <property name="hello" value="Internetinis skaiciuotuvas. Galimos operacijos: Sudeti Atimti Dauginti Dalinti">
+
+        </property>
+    </bean>
+</beans>
