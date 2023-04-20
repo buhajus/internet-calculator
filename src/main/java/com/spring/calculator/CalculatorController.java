@@ -4,6 +4,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +19,13 @@ import java.util.List;
 
 //Web controller, leidžia naudoti @RequestMapping
 //@RestContoller anotacija nurodo, kad pvz. String tipo rezultatas turėtų būti atvaizduojamas, toks, koks yra
-@RestController
+//@RestContoller anotacija naudojama tada kai frontedne nenaudojam springo (javascirpt, react, angular)
+//dažniausiai gražinami formatai, JSON, .xml
+//t.y. negražinami vaizdo (html, jsp)
+//@RestController
 
+//kadangi mus reikia gražinti (view) pagal spring MVC, naudosime anotacija @Controller
+@Controller
 //Žymi konfigūracijos komponentą, viduje leidžia kurti BEAN per metodus su @Bean anotacija
 //Ši klasės lygio anotacija nurodo Spring   framwork atspėti konfigūraciją
 //Remiantis priklausomybėmis (JAR bibliotekomis), kurias programuotojas įtraukė į projektą (pom.xml)
@@ -25,10 +33,11 @@ import java.util.List;
 @EnableAutoConfiguration
 public class CalculatorController {
 
-
-    @GetMapping("/calc")
+    //kadangi skaiciuotuvo forma naudoja POST f-ja, cia irgi nurodysime POST
+    @PostMapping("/calculate")
     // @RequestParam anotacija perduoda per URL perduodus duomenis (String, String) kurie patalpinami HasMap (K,V)
-    public String calculate(@RequestParam HashMap<String, String> numbers) {
+
+    public String calculate(@RequestParam HashMap<String, String> inputForm, ModelMap outputForm) {
 
         //Per URL perduodamas key, turi pavadinima sk1
         //pagal key sk1 ištraukiama reikšmė, pvz. vartotojas įvėdė 8
@@ -37,10 +46,11 @@ public class CalculatorController {
         //Key tiek fronted tiek backed turi sutapti
         //URL pvz  http://localhost:8080/calc?sk1=20&sk2=20&action=*
         //simboliai koduojasi https://meyerweb.com/eric/tools/dencoder/
-        int sk1 = Integer.parseInt(numbers.get("sk1"));
-        int sk2 = Integer.parseInt(numbers.get("sk2"));
+        int sk1 = Integer.parseInt(inputForm.get("sk1"));
+        int sk2 = Integer.parseInt(inputForm.get("sk2"));
 
-        String action = numbers.get("action");
+        String action = inputForm.get("action");
+
 
         double result = 0;
         switch (action) {
@@ -48,7 +58,7 @@ public class CalculatorController {
                 result = sk1 * sk2;
                 break;
             case "/":
-                if (sk1 > 0) {
+                if (sk1 != 0) {
                     result = sk1 / sk2;
                 }
                 break;
@@ -61,8 +71,15 @@ public class CalculatorController {
 
         //TODO suskaičiuoti ir atspausdinti rezultata, kas iš ko
         // int result = sk1 * sk2 ;
+        //inputForm naudojamas siųsi duomenis iš spring MVC controller į JSP failą (vaizdą)
+        outputForm.put("sk1","sk1");
+        outputForm.put("sk2","sk2");
+        outputForm.put("action","action");
+        outputForm.put("result","result");
 
-        return sk1 + " " + action + " " + sk2 + "= " + result;
+        //grąžinamas vaizdas (forma .jsp)
+        //svarbu nurodyti per application.properties prefix ir suffix nes pagal tai ieškos vaizdo projekte
+        return "calculate";
         // ApplicationContext yra interface skirtassuteikti informaciją apie aplikacijos konfigūraciją.
         //Šiuo atveju naudojama konfigūracija paimam iš xml failo
         //  ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
@@ -80,6 +97,12 @@ public class CalculatorController {
         //  return bean.getHello();
 
 
+    }
+
+@GetMapping("/")
+    public String homePage() {
+        //grąžiname JSP failą, kuris turi būti talpinamas "webapp -> WEB-INF ->  JSP" folderi
+        return "calculator";
     }
 
 
