@@ -5,7 +5,7 @@
     </head>
     <body>
         <h2>Internetinis skaičiuotuvas. Galimos operacijos: sudėti, atimti, dauginti, dalinti</h2>
-        <form method="POST" action="calculate">
+        <form method="post" action="calculate">
             Pirmas skaičius: <input type="number" name="sk1"><p>
             Antras skaičius: <input type="number" name="sk2"><p>
             Operacijos ženklas:

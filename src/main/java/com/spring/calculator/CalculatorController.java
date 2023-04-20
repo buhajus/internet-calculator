@@ -46,11 +46,11 @@ public class CalculatorController {
         //Key tiek fronted tiek backed turi sutapti
         //URL pvz  http://localhost:8080/calc?sk1=20&sk2=20&action=*
         //simboliai koduojasi https://meyerweb.com/eric/tools/dencoder/
+
+
         int sk1 = Integer.parseInt(inputForm.get("sk1"));
         int sk2 = Integer.parseInt(inputForm.get("sk2"));
-
         String action = inputForm.get("action");
-
 
         double result = 0;
         switch (action) {
@@ -72,10 +72,11 @@ public class CalculatorController {
         //TODO suskaičiuoti ir atspausdinti rezultata, kas iš ko
         // int result = sk1 * sk2 ;
         //inputForm naudojamas siųsi duomenis iš spring MVC controller į JSP failą (vaizdą)
-        outputForm.put("sk1","sk1");
-        outputForm.put("sk2","sk2");
-        outputForm.put("action","action");
-        outputForm.put("result","result");
+        outputForm.put("sk1", sk1);
+        outputForm.put("sk2",sk2);
+        outputForm.put("action", action);
+        outputForm.put("result", result);
+
 
         //grąžinamas vaizdas (forma .jsp)
         //svarbu nurodyti per application.properties prefix ir suffix nes pagal tai ieškos vaizdo projekte
@@ -99,7 +100,7 @@ public class CalculatorController {
 
     }
 
-@GetMapping("/")
+    @GetMapping("/")
     public String homePage() {
         //grąžiname JSP failą, kuris turi būti talpinamas "webapp -> WEB-INF ->  JSP" folderi
         return "calculator";

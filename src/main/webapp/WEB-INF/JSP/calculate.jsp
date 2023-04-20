@@ -5,5 +5,8 @@
     </head>
     <body>
         <h4>${sk1} ${action} ${sk2} = ${result} </h4>
+        <form>
+         <input type="button" value="Go back!" onclick="history.back()">
+        </form>
     </body>
 </html>
