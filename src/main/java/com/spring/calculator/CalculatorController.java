@@ -26,7 +26,7 @@ import java.util.List;
 @EnableAutoConfiguration
 public class CalculatorController {
 
-<<<<<<< HEAD
+
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String index() {
         // ApplicationContext yra interface skirtassuteikti informaciją apie aplikacijos konfigūraciją.
@@ -44,7 +44,7 @@ public class CalculatorController {
         //bean -  kalses objektas, kuris atitinka singleton pattern
         HelloWorld bean = (HelloWorld) applicationContext.getBean("helloWorld");
         return bean.getHello();
-=======
+
     @GetMapping("/")
     public String index() {
         // ApplicationContext yra interface skirtassuteikti informaciją apie aplikacijos konfigūraciją.
@@ -62,7 +62,7 @@ public class CalculatorController {
         //bean -  kalses objektas, kuris atitinka singleton pattern
         // HelloWorld bean = (HelloWorld) applicationContext.getBean("helloWorld");
         // return bean.getHello();
->>>>>>> origin/main
+
 
     }
 
@@ -73,8 +73,7 @@ public class CalculatorController {
 
         return "Dalyba 8/3 = " + dalyba;
     }
-<<<<<<< HEAD
-=======
+
 
     @GetMapping("/list")
     public List<Student> all() {
@@ -104,5 +103,5 @@ public class CalculatorController {
             , @RequestParam(name = "lastName") String lastName) {
         return new Student(name, lastName);
     }
->>>>>>> origin/main
+
 }
