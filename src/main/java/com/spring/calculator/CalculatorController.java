@@ -113,7 +113,6 @@ public class CalculatorController {
         //   HelloWorld bean = (HelloWorld) applicationContext.getBean("helloWorld");
         //  return bean.getHello();
 
-
     }
 
     @GetMapping("/")
