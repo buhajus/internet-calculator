@@ -60,6 +60,9 @@ public class CalculatorController {
             case "/":
                 if (sk1 != 0) {
                     result = sk1 / sk2;
+
+                } else {
+                    return "error";
                 }
                 break;
             case "-":
@@ -67,13 +70,14 @@ public class CalculatorController {
                 break;
             case "+":
                 result = sk1 + sk2;
+                break;
         }
 
         //TODO suskaičiuoti ir atspausdinti rezultata, kas iš ko
         // int result = sk1 * sk2 ;
         //inputForm naudojamas siųsi duomenis iš spring MVC controller į JSP failą (vaizdą)
         outputForm.put("sk1", sk1);
-        outputForm.put("sk2",sk2);
+        outputForm.put("sk2", sk2);
         outputForm.put("action", action);
         outputForm.put("result", result);
 
