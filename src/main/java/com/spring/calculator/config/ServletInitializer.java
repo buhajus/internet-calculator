@@ -1,5 +1,6 @@
-package com.spring.calculator;
+package com.spring.calculator.config;
 
+import com.spring.calculator.CalculatorApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 

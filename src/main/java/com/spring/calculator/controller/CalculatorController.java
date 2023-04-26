@@ -1,22 +1,17 @@
-package com.spring.calculator;
+package com.spring.calculator.controller;
 
+import com.spring.calculator.model.Number;
 import jakarta.validation.Valid;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 //Web controller, leidžia naudoti @RequestMapping
@@ -124,8 +119,8 @@ public class CalculatorController {
         return "calculator";
     }
 
-
-//    @RequestMapping("/dalinti")
+//
+//    @RequestMapping("/test")
 //    public String dalint() {
 //        double dalyba = 8 / 3;
 //

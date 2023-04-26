@@ -1,4 +1,4 @@
-package com.spring.calculator;
+package com.spring.calculator.model;
 
 public class Student {
     private int id;

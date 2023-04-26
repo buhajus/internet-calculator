@@ -1,24 +1,41 @@
-package com.spring.calculator;
+package com.spring.calculator.model;
 
 import jakarta.validation.constraints.Min;
 
+import javax.persistence.*;
+
+//@Entity tai, POJO klasė sujungta su DB esančia lentele nudojant ORM techniką
+@Entity
+//Anotacija @Table nurodo, jog susiesime POJO klasę su DB esančia lentele, kurios pavadinimas "numbers"
+@Table(name = "numbers") //DB lentelė - daugiskaita pagal kalsės pavadinimą
 public class Number {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//AKA DB autoincrement f-ja
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "sk1")
     @Min(value = 0, message = "Validacijos klaida: skaičius negali būti neigiamas")
     private int sk1;
 
+    @Column(name = "sk2")
     @Min(value = 0, message = "Validacijos klaida: skaičius negali būti neigiamas")
     private int sk2;
 
+    @Column(name = "action")
     private String action;
+
+    @Column(name = "result")
     private int result;
 
 
-    //būtinas naudojant Spring framework
+    //būtinas tuščias konstruktorius naudojant Spring framework
     public Number() {
     }
 
-    public Number(int sk1, int sk2, String action, int result) {
+    public Number(int id, int sk1, int sk2, String action, int result) {
+        this.id = id;
         this.sk1 = sk1;
         this.sk2 = sk2;
         this.action = action;
@@ -27,6 +44,10 @@ public class Number {
 
     public int getSk1() {
         return sk1;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setSk1(int sk1) {
@@ -60,10 +81,12 @@ public class Number {
     @Override
     public String toString() {
         return "Number{" +
-                "sk1=" + sk1 +
+                "id=" + id +
+                ", sk1=" + sk1 +
                 ", sk2=" + sk2 +
                 ", action='" + action + '\'' +
                 ", result=" + result +
                 '}';
     }
+
 }
