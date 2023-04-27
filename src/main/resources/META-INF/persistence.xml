@@ -16,8 +16,11 @@
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="hibernate.show_sql" value="true"/><!--terminale rodo sql užklausos-->
             <!--tells hibernate to update the database schema each time the session factory is created. -->
-            <property name="hibernate.hbm2ddl.auto" value="create"/><!-- pagal @Entity sukuria DB stulpelius/
-            updatina įrašus -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!-- pagal @Entity insert - sukuria, update atnaujina DB įrašus  -->
+            <!-- svarbu ! Paleidus primą kartą aplikaciją -turi būti create.
+            Jeigu įrašai sukurti, reikšmę reikia pakeisti į update -->
+
         </properties>
     </persistence-unit>
 </persistence>

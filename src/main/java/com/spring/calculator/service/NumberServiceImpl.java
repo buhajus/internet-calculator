@@ -23,7 +23,6 @@ public class NumberServiceImpl implements NumberService {
     //kitu atveju metama klaida -
     // Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans
     // or using @Qualifier to identify the bean that should be consumed
-
     @Qualifier("NumberDAO")
     private NumberDAO numberDAO;
 

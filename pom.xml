@@ -54,7 +54,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
+            <version>8.0.33</version>
         </dependency>
 
 
@@ -65,6 +65,14 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.3.7.Final</version>
         </dependency>
+
+        <!-- API, java.xml.bind module -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
 
     </dependencies>
 
