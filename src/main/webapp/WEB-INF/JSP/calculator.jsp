@@ -29,7 +29,7 @@
                 <option value="*">Daugyba</option>
                 <option value="/">Dalyba</option>
             </select>
-            <input type="submit" value="skaičiuoti">
+            <input type="submit" class="btn-success" value="Skaičiuoti">
         </form:form>
         </div>
     </body>

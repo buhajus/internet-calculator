@@ -8,10 +8,13 @@
 <head>
     <title>Skaičiai</title>
     <jsp:include page="header.jsp"/>
+    <style>
+            th{text-align:center}
+        </style>
 </head>
 <body class="container">
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-light">
 
             <tr>
                 <th>Pirmas skaičius</th>

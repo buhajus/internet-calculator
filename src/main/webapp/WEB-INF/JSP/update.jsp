@@ -5,7 +5,7 @@
 		<title>Skaičiaus atnaujinimas</title>
 		<jsp:include page="header.jsp"/>
 	</head>
-	<body>
+	<body class="container">
 		<form:form name="number" action="/updateNumber" method="post">
 			<!-- id būtina pateikti formoje, kitaip į back-end nueis null. Todėl darome hidden, kad neredaguotų -->
 			<input type="hidden" name="id" value="${number.id}"><p>
@@ -17,7 +17,8 @@
 			<input type="number" name="sk2" value="${number.sk2}"><p>
 			Rezultatas:<br>
 			<input type="number" name="result" value="${number.result}"><p>
-			<input type="submit" value="Atnaujinti">
+		 <input type="button" class="d-inline p-2 btn btn-secondary" value="Atgal" onclick="history.back()">
+		 <input type="submit" class="btn btn-warning" value="Atnaujinti">
 		</form:form>
 	</body>
 </html>

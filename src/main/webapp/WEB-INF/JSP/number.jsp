@@ -30,7 +30,9 @@
 				</tr>
 			</table>
 		</div>
-		<br>
-		<a type="button" href="/numbers" class="button">Atgal</a>
+
+
+		<a type="button" href="/numbers" class="d-inline btn btn-secondary">Atgal</a>
+		<a href="/update?id=${number.id}"  class="btn btn-warning">Atnaujinti</a>
 	</body>
 </html>
