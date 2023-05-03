@@ -15,7 +15,7 @@
             <a class="navbar-brand" href="http://localhost:8080/">Skaičiuotuvas</a>
         </div>
         <ul class="nav navbar-nav navbar-left">
-            <li class="active"><a href="/skaiciai">Atliktos operacijos</a></li>
+            <li class="active"><a href="/numbers">Atliktos operacijos</a></li>
         </ul>
     </div>
 </nav>

@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Skaičiuoti</title>
+            <jsp:include page="header.jsp"/>
     </head>
     <body>
         <h4>${sk1} ${action} ${sk2} = ${result} </h4>

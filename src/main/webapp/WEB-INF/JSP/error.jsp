@@ -2,9 +2,10 @@
 <html>
     <head>
         <title>Error</title>
+        <jsp:include page="header.jsp"/>
     </head>
     <body>
-        <h4>Dalyba iš 0 negalima  </h4>
+        <h4>Dalyba iš 0 negalima </h4>
           <form>
                  <input type="button" value="Go back!" onclick="history.back()">
                 </form>

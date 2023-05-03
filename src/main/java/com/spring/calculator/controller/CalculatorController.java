@@ -74,8 +74,8 @@ public class CalculatorController {
                     result = sk1 * sk2;
                     break;
                 case "/":
-                    if (sk1 != 0) {
-                        result = (double) sk1/ sk2;
+                    if (sk2 != 0) {
+                        result = (double) sk1 / sk2;
                     } else {
                         return "error";
                     }
@@ -97,7 +97,7 @@ public class CalculatorController {
             outputForm.put("result", result);
 
             //Kreipiamės į Service kuris savo ruoštu krepiasi į DAO ir išsaugoja įrašą DB
-            numberService.insert(new Number(sk1,sk2,action,result));
+            numberService.insert(new Number(sk1, sk2, action, result));
 
             return "calculate";
         }
@@ -132,6 +132,46 @@ public class CalculatorController {
         //grąžiname JSP failą, kuris turi būti talpinamas "webapp -> WEB-INF ->  JSP" folderi
         return "calculator";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/numbers")
+    public String getAllNumbers(Model model) {
+        model.addAttribute("numbers", numberService.getAll());
+        return "numbers";
+    }
+
+
+    //id - gaunamas iš front end vartotojui pasrinkus konkretų įrašą
+    @RequestMapping(method = RequestMethod.GET, value = "/show{id}")
+    public String getById(@RequestParam("id") int id, Model model) {
+        model.addAttribute("number", numberService.getById(id));
+        return "number";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/delete{id}")
+    public String deleteById(@RequestParam("id") int id, Model model) {
+        numberService.delete(id);
+        model.addAttribute("numbers", numberService.getAll());
+        return "numbers";
+    }
+
+    //atnaujinat išrašą, pirmiausia reikia jį parodyti
+    @RequestMapping(method = RequestMethod.GET, value = "/update{id}")
+    public String updateById(@RequestParam("id") int id, Model model) {
+        //Kai užkrauname įrašo redagavimo formą, privalome jos laukelius užpildyti įrašo informacija
+        model.addAttribute("number", numberService.getById(id));
+        return "update";
+    }
+
+    //Kadangi forma naudoja metoda POST, čia irgi nurodome POST
+    @RequestMapping(method = RequestMethod.POST, value = "/updateNumber")
+    public String updateNumber(@ModelAttribute("number") Number number) {
+        numberService.update(number);
+        //redirect - nukreipia vartotoją į įrašą atvaizdavimo puslapį(getById)
+        return "redirect:/show?id=" + number.getId();
+    }
+
+}
+
 
 //
 //    @RequestMapping("/test")
@@ -176,5 +216,4 @@ public class CalculatorController {
 //    }
 
 
-}
 

@@ -3,11 +3,13 @@
 <html>
     <head>
         <title>Skaičiuotuvas</title>
+        <jsp:include page="header.jsp"/>
         <style>
             .error{color:red}
         </style>
     </head>
-    <body>
+    <body class="container">
+    <div class="table-responsive">
 
         <h2>Internetinis skaičiuotuvas. Galimos operacijos: sudėti, atimti, dauginti, dalinti</h2>
         <h3>Skaičiuotuvas jautrus neigiamiems skaičiams</h3>
@@ -29,5 +31,6 @@
             </select>
             <input type="submit" value="skaičiuoti">
         </form:form>
+        </div>
     </body>
 </html>

@@ -59,6 +59,11 @@ public class Number {
         return id;
     }
 
+    //setId būtinas, kad Model vaikščiotų tarp front ir back end
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setSk1(int sk1) {
         this.sk1 = sk1;
     }
