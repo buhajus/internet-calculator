@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 <html>
 	<head>
 		<title>Skaičius</title>
@@ -10,6 +12,9 @@
 			<table class="table table-striped">
 				<tr>
 					<td><b>Id:</b></td>
+					<c:if test ="${number.id}">
+					<td>${number.id} maz</td>
+					</c:if>
 					<td>${number.id}</td>
 				</tr>
 				<tr>
