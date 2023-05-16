@@ -11,7 +11,7 @@
     <groupId>com.spring</groupId>
     <artifactId>calculator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>calculator</name>
     <description>first calculator in spring</description>
     <properties>
@@ -30,13 +30,13 @@
             <scope>runtime</scope>
         </dependency>
 
-		<!--jeigu nebus šios depencecy, gausme JAVAx servlet Servlet Expansion-->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
-			<version>3.1.0</version>
-		</dependency>
+        <!--jeigu nebus šios depencecy, gausme JAVAx servlet Servlet Expansion-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+            <version>3.1.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,28 +76,35 @@
         <!-- JSP JSTL (java server pages tag library) anotacijoms, pvz.: foreach, URL, param -->
 
 
-       <dependency>
-           <groupId>jakarta.servlet.jsp.jstl</groupId>
-           <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-           <version>3.0.0</version>
-       </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
 
 
-       <dependency>
-           <groupId>org.glassfish.web</groupId>
-           <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-           <version>3.0.1</version>
-       </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+        </dependency>
 
-   </dependencies>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-core</artifactId>
+            <version>1.0</version>
+        </dependency>
 
-   <build>
-       <plugins>
-           <plugin>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-maven-plugin</artifactId>
-           </plugin>
-       </plugins>
-   </build>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

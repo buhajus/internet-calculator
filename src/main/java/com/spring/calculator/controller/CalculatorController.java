@@ -1,5 +1,8 @@
 package com.spring.calculator.controller;
 
+
+import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.spring.calculator.model.Number;
 import com.spring.calculator.service.NumberService;
 import jakarta.validation.Valid;
@@ -15,6 +18,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+
+
 
 
 //Web controller, leidžia naudoti @RequestMapping
@@ -39,6 +44,7 @@ public class CalculatorController {
     @Autowired
     @Qualifier("NumberService")
     public NumberService numberService;
+    private static GpioController pin;
 
     //kadangi skaiciuotuvo forma naudoja POST f-ja, cia irgi nurodysime POST
     @PostMapping("/calculate")
@@ -131,6 +137,19 @@ public class CalculatorController {
         model.addAttribute("number", new Number());
         //grąžiname JSP failą, kuris turi būti talpinamas "webapp -> WEB-INF ->  JSP" folderi
         return "calculator";
+    }
+    @RequestMapping ("sd")
+    public String sdCard(){
+
+        if(pin == null){
+          GpioController gpio = GpioFactory.getInstance();
+        pin = (GpioController) gpio.provisionDigitalOutputPin(RaspiPin.GPIO_16,"sd_card", PinState.HIGH);
+        }
+
+        return "okk";
+
+
+
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/numbers")
