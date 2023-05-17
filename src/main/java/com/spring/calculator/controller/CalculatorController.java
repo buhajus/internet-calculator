@@ -44,7 +44,7 @@ public class CalculatorController {
     @Qualifier("NumberService")
     public NumberService numberService;
     private static GpioController pin;
-    final GpioController gpioController = GpioFactory.getInstance();
+    final GpioController gpio = GpioFactory.getInstance();
     final Console console = new Console();
 
     //kadangi skaiciuotuvo forma naudoja POST f-ja, cia irgi nurodysime POST
@@ -141,27 +141,24 @@ public class CalculatorController {
     @RequestMapping("/sd")
     public String sdCard() throws InterruptedException {
         int pinNumber = 27;
-
-            GpioController gpio = GpioFactory.getInstance();
-            GpioPinDigitalInput  input =  gpio.provisionDigitalInputPin(RaspiPin.GPIO_27);
+        try {
+            GpioPinDigitalInput input = gpio.provisionDigitalInputPin(RaspiPin.GPIO_27);
             PinState pinValue = input.getState();
             if (pinValue.isHigh()) {
                 console.println("Pin value is HIGH");
+                gpio.shutdown();
             } else {
                 console.println("Pin value is LOW");
+                gpio.shutdown();
             }
+            gpio.toggle();
+            console.waitForExit();
+        }catch (Exception io){
+            System.out.println("erro");
+        }
 
 
-
-
-
-            gpio.shutdown();
-           
-
-
-
-
-       //Thread.sleep(1000);
+        //Thread.sleep(1000);
 
 //        while (true){
 //            GpioPinDigitalInput pin = (GpioPinDigitalInput) gpioController.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
@@ -180,9 +177,6 @@ public class CalculatorController {
         return "low";
 
     }
-
-
-
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/numbers")
