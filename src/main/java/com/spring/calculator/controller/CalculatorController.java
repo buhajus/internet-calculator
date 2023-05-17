@@ -141,17 +141,24 @@ public class CalculatorController {
     @RequestMapping("/sd")
     public String sdCard() throws InterruptedException {
         int pinNumber = 27;
-        if(pin == null){
+
             GpioController gpio = GpioFactory.getInstance();
-            pin = (GpioController) gpio.provisionDigitalInputPin(RaspiPin.GPIO_27);
-            pin.toggle();
+            GpioPinDigitalInput  input =  gpio.provisionDigitalInputPin(RaspiPin.GPIO_27);
+            PinState pinValue = input.getState();
+            if (pinValue.isHigh()) {
+                console.println("Pin value is HIGH");
+            } else {
+                console.println("Pin value is LOW");
+            }
 
 
-            console.println("high");
+
+
+
             gpio.shutdown();
-            return "high";
+           
 
-        }
+
 
 
        //Thread.sleep(1000);
@@ -169,7 +176,7 @@ public class CalculatorController {
 //
 //
 //        }
-        console.println("low");
+
         return "low";
 
     }
