@@ -141,7 +141,7 @@ public class CalculatorController {
         final GpioController gpioController = GpioFactory.getInstance();
         final Console console = new Console();
         int pinNumber = 27;
-
+        Thread.sleep(1000);
 
         while (true){
             GpioPinDigitalInput pin = (GpioPinDigitalInput) gpioController.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
@@ -157,6 +157,7 @@ public class CalculatorController {
 
 
         }
+
 
 
     }
