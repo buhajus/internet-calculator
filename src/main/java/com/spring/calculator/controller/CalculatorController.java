@@ -2,7 +2,6 @@ package com.spring.calculator.controller;
 
 
 import com.pi4j.io.gpio.*;
-import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.util.Console;
 import com.spring.calculator.model.Number;
 import com.spring.calculator.service.NumberService;
@@ -18,10 +17,11 @@ import org.springframework.validation.BindingResult;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 
 //Web controller, leidžia naudoti @RequestMapping
@@ -178,7 +178,7 @@ public class CalculatorController {
 
 
             }
-
+//TODO:: use thread or smth to run in backgroiund
 
         //Thread.sleep(1000);
 
@@ -199,6 +199,8 @@ public class CalculatorController {
 
 
     }
+
+
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/numbers")
