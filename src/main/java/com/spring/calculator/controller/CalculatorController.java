@@ -154,8 +154,10 @@ public class CalculatorController {
                 PinState pinValue = pin.getState();
                 console.println(pinValue);
 
+
                 // Delay for 2 seconds
                 Thread.sleep(2000);
+                return "HIGH ok";
             }
         } catch (InterruptedException e) {
             console.println("Interrupted");
