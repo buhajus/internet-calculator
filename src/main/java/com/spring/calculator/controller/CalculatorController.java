@@ -145,7 +145,7 @@ public class CalculatorController {
     public String sdCard() throws InterruptedException {
         int pinNumber = 27;
 
-        try {
+
             // Set pin numbering mode to BCM
             GpioFactory.setDefaultProvider(new RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING));
 
@@ -153,22 +153,31 @@ public class CalculatorController {
             GpioPinDigitalInput pin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_27, PinPullResistance.PULL_DOWN);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
+        PinState pinValue = pin.getState();
+
             // Continuously read pin value
-            while (true) {
-                PinState pinValue = pin.getState();
+            if (pin.isHigh()) {
+
                 console.println(pinValue);
                 System.out.println(dtf.format(now));
+                gpio.shutdown();
+                gpio.unprovisionPin(pin);
+                return "high";
 
                 // Delay for 2 seconds
-                Thread.sleep(2000);
+                //Thread.sleep(2000);
 
             }
-        } catch (InterruptedException e) {
-            console.println("Interrupted");
-        } finally {
-            // Shutdown GPIO controller
-            gpio.shutdown();
-        }
+            else {
+
+                console.println(pinValue);
+                System.out.println(dtf.format(now));
+                gpio.shutdown();
+                gpio.unprovisionPin(pin);
+                return "low";
+
+
+            }
 
 
         //Thread.sleep(1000);
@@ -187,7 +196,7 @@ public class CalculatorController {
 //
 //        }
 
-        return "low";
+
 
     }
 
