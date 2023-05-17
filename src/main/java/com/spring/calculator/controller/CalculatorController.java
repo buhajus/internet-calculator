@@ -3,6 +3,7 @@ package com.spring.calculator.controller;
 
 import com.pi4j.io.gpio.*;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
+import com.pi4j.util.Console;
 import com.spring.calculator.model.Number;
 import com.spring.calculator.service.NumberService;
 import jakarta.validation.Valid;
@@ -18,8 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-
-
 
 
 //Web controller, leidžia naudoti @RequestMapping
@@ -82,8 +81,6 @@ public class CalculatorController {
                 case "/":
                     if (sk2 != 0) {
                         result = (double) sk1 / sk2;
-                    } else {
-                        return "error";
                     }
                     break;
                 case "-":
@@ -138,19 +135,32 @@ public class CalculatorController {
         //grąžiname JSP failą, kuris turi būti talpinamas "webapp -> WEB-INF ->  JSP" folderi
         return "calculator";
     }
-    @RequestMapping ("sd")
-    public String sdCard(){
 
-        if(pin == null){
-          GpioController gpio = GpioFactory.getInstance();
-        pin = (GpioController) gpio.provisionDigitalOutputPin(RaspiPin.GPIO_16,"sd_card", PinState.HIGH);
-        }
+    @RequestMapping("/sd")
+    public String sdCard() throws InterruptedException {
+        final GpioController gpioController = GpioFactory.getInstance();
+        final Console console = new Console();
+        int pinNumber = 27;
+        GpioPinDigitalInput pin = (GpioPinDigitalInput) gpioController.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
+        PinState pinState = pin.getState();
 
-        return "okk";
+            while (true) {
+                if (pinState.isHigh()) {
+                    console.println("high");
+
+                } else {
+                    console.println("Low");
+
+                }
+                console.waitForExit();
+            }
+
+
 
 
 
     }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/numbers")
     public String getAllNumbers(Model model) {
