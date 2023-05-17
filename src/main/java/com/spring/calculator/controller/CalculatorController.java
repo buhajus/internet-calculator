@@ -143,7 +143,7 @@ public class CalculatorController {
         int pinNumber = 27;
         if(pin == null){
             GpioController gpio = GpioFactory.getInstance();
-            pin = (GpioController) gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
+            pin = (GpioController) gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber),"sensor",PinState.LOW);
             console.println("high");
             return "high";
         }
