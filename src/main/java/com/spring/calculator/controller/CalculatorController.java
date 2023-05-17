@@ -44,6 +44,8 @@ public class CalculatorController {
     @Qualifier("NumberService")
     public NumberService numberService;
     private static GpioController pin;
+    final GpioController gpioController = GpioFactory.getInstance();
+    final Console console = new Console();
 
     //kadangi skaiciuotuvo forma naudoja POST f-ja, cia irgi nurodysime POST
     @PostMapping("/calculate")
@@ -138,27 +140,32 @@ public class CalculatorController {
 
     @RequestMapping("/sd")
     public String sdCard() throws InterruptedException {
-        final GpioController gpioController = GpioFactory.getInstance();
-        final Console console = new Console();
         int pinNumber = 27;
-        Thread.sleep(1000);
-
-        while (true){
-            GpioPinDigitalInput pin = (GpioPinDigitalInput) gpioController.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
-            PinState pinState = pin.getState();
-            if (pinState.isHigh()) {
-                console.println("high");
-                return "high";
-
-            } else {
-                console.println("Low");
-                return "low";
-            }
-
-
+        if(pin == null){
+            GpioController gpio = GpioFactory.getInstance();
+            pin = (GpioController) gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
+            console.println("high");
+            return "high";
         }
+        pin.toggle();
 
+       //Thread.sleep(1000);
 
+//        while (true){
+//            GpioPinDigitalInput pin = (GpioPinDigitalInput) gpioController.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
+//            PinState pinState = pin.getState();
+//            if (pinState.isHigh()) {
+//
+//
+//            } else {
+//                console.println("Low");
+//
+//            }
+//
+//
+//        }
+
+        return "low";
 
     }
 
