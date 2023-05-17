@@ -141,20 +141,27 @@ public class CalculatorController {
     @RequestMapping("/sd")
     public String sdCard() throws InterruptedException {
         int pinNumber = 27;
+
         try {
-            GpioPinDigitalInput input = gpio.provisionDigitalInputPin(RaspiPin.GPIO_27);
-            PinState pinValue = input.getState();
-            if (pinValue.isHigh()) {
-                console.println("Pin value is HIGH");
-                gpio.shutdown();
-            } else {
-                console.println("Pin value is LOW");
-                gpio.shutdown();
+            // Set pin numbering mode to BCM
+            GpioFactory.setDefaultProvider(new RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING));
+
+            // Create digital input pin
+            GpioPinDigitalInput pin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_27, PinPullResistance.PULL_DOWN);
+
+            // Continuously read pin value
+            while (true) {
+                PinState pinValue = pin.getState();
+                console.println(pinValue);
+
+                // Delay for 2 seconds
+                Thread.sleep(2000);
             }
-            gpio.toggle();
-            console.waitForExit();
-        }catch (Exception io){
-            System.out.println("erro");
+        } catch (InterruptedException e) {
+            console.println("Interrupted");
+        } finally {
+            // Shutdown GPIO controller
+            gpio.shutdown();
         }
 
 
