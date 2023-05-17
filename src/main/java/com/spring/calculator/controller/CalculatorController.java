@@ -18,6 +18,9 @@ import org.springframework.validation.BindingResult;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -148,16 +151,17 @@ public class CalculatorController {
 
             // Create digital input pin
             GpioPinDigitalInput pin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_27, PinPullResistance.PULL_DOWN);
-
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
             // Continuously read pin value
             while (true) {
                 PinState pinValue = pin.getState();
                 console.println(pinValue);
-
+                System.out.println(dtf.format(now));
 
                 // Delay for 2 seconds
                 Thread.sleep(2000);
-                return "HIGH ok";
+
             }
         } catch (InterruptedException e) {
             console.println("Interrupted");
