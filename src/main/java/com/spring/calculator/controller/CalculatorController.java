@@ -141,25 +141,30 @@ public class CalculatorController {
         final GpioController gpioController = GpioFactory.getInstance();
         final Console console = new Console();
         int pinNumber = 27;
-        GpioPinDigitalInput pin = (GpioPinDigitalInput) gpioController.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
-        PinState pinState = pin.getState();
 
-            while (true) {
-                if (pinState.isHigh()) {
-                    console.println("high");
 
-                } else {
-                    console.println("Low");
+        try {
+            GpioPinDigitalInput pin = (GpioPinDigitalInput) gpioController.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber));
+            PinState pinState = pin.getState();
+            if (pinState.isHigh()) {
+                console.println("high");
 
-                }
-                console.waitForExit();
+            } else {
+                console.println("Low");
+
             }
+            console.waitForExit();
+
+        } finally {
+            gpioController.shutdown();
+        }
 
 
-
-
-
+        return "ok";
     }
+
+
+
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/numbers")
